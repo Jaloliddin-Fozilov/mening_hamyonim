@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 import './widgets/active_date.dart';
 import './widgets/money_widget.dart';
 import './widgets/percent_money.dart';
 import './widgets/list_royxatlar.dart';
+import './widgets/add_consumption.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,82 +25,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HamyonDastur extends StatelessWidget {
+class HamyonDastur extends StatefulWidget {
+  @override
+  State<HamyonDastur> createState() => _HamyonDasturState();
+}
+
+class _HamyonDasturState extends State<HamyonDastur> {
   void _addConsumptionModalWindow(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (ctx) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 16,
-                left: 16,
-                right: 16,
-                bottom: MediaQuery.of(context).viewInsets.bottom > 0
-                    ? MediaQuery.of(context).viewInsets.bottom + 16
-                    : 16,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 150.0,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            labelText: "Xarajat nomi",
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 150.0,
-                        child: TextField(
-                          decoration:
-                              InputDecoration(labelText: "Xarajat miqdori"),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Xarajat kuni tanlanmadi!"),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text("KUNNI TANLASH"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("icon tanlanmagan!"),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text("ICON TANLASH"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text("BEKOR QILISH"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text("KIRITISH"),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
+      isScrollControlled: true,
+      isDismissible: false,
+      context: context,
+      builder: (ctx) {
+        return AddConsumtionModal();
+      },
+    );
+  }
+
+  void selectDate(BuildContext context) {
+    showMonthPicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    );
   }
 
   @override
@@ -119,7 +68,9 @@ class HamyonDastur extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ActiveDate(),
+          ActiveDate(
+            selectDate,
+          ),
           MoneyWidget(),
           PercentAndMoney(),
           ListRoyxatlar(),

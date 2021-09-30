@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ActiveDate extends StatelessWidget {
-  const ActiveDate({
-    Key? key,
-  }) : super(key: key);
+  final Function selectDate;
+
+  ActiveDate(
+    this.selectDate,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,9 @@ class ActiveDate extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              selectDate(context);
+            },
             child: Text(
               "August, 2021",
               style: TextStyle(color: Colors.black, fontSize: 18),
