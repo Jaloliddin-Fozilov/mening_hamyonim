@@ -3,6 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
 class AddConsumtionModal extends StatefulWidget {
+  final Function xarajat;
+  
+  AddConsumtionModal(this.xarajat);
+
+
   @override
   State<AddConsumtionModal> createState() => _AddConsumtionModalState();
 }
@@ -10,6 +15,19 @@ class AddConsumtionModal extends StatefulWidget {
 class _AddConsumtionModalState extends State<AddConsumtionModal> {
   DateTime? tanlanganKun;
   IconData? tanlanganIcon;
+
+  final inputXarajatName = TextEditingController();
+  final inputXarajatMiqdor = TextEditingController();
+
+
+  
+
+  void submitXarajat(){
+    if(inputXarajatName.text.isEmpty && inputXarajatMiqdor.text.isEmpty && tanlanganKun == null && tanlanganIcon == null){
+      return;
+    }
+    widget.xarajat(inputXarajatName.text,tanlanganKun,double.parse(inputXarajatMiqdor.text),tanlanganIcon);
+  }
 
   void selectDateDay(BuildContext context) {
     showDatePicker(
@@ -43,8 +61,6 @@ class _AddConsumtionModalState extends State<AddConsumtionModal> {
 
   @override
   Widget build(BuildContext context) {
-    print("tanlanganIcon $tanlanganIcon");
-    print("tanlanganKun $tanlanganKun");
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.only(
@@ -66,12 +82,14 @@ class _AddConsumtionModalState extends State<AddConsumtionModal> {
                     decoration: InputDecoration(
                       labelText: "Xarajat nomi",
                     ),
+                    controller: inputXarajatName,
                   ),
                 ),
                 Container(
                   width: 150.0,
                   child: TextField(
                     decoration: InputDecoration(labelText: "Xarajat miqdori"),
+                    controller: inputXarajatMiqdor,
                     keyboardType: TextInputType.number,
                   ),
                 ),
@@ -117,7 +135,7 @@ class _AddConsumtionModalState extends State<AddConsumtionModal> {
                   child: Text("BEKOR QILISH"),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: submitXarajat,
                   child: Text("KIRITISH"),
                 )
               ],

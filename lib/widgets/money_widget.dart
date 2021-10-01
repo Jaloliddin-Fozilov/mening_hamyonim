@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MoneyWidget extends StatelessWidget {
-  const MoneyWidget({
-    Key? key,
-  }) : super(key: key);
+  final Function() previousMonth;
+  final Function() nextMonth;
+  
+  MoneyWidget(
+    this.previousMonth,
+    this.nextMonth,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class MoneyWidget extends StatelessWidget {
                 color: Colors.black45,
                 iconSize: 24,
                 padding: const EdgeInsets.all(0),
-                onPressed: () {},
+                onPressed: previousMonth,
               ),
             ),
           ),
@@ -64,7 +68,7 @@ class MoneyWidget extends StatelessWidget {
                 color: Colors.black45,
                 iconSize: 24,
                 padding: const EdgeInsets.all(0),
-                onPressed: () {},
+                onPressed: nextMonth,
               ),
             ),
           ),

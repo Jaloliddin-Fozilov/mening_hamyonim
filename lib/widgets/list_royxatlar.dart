@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mening_hamyonim/models/list_model.dart';
+import 'listtile_royxat.dart';
 
 class ListRoyxatlar extends StatelessWidget {
-  const ListRoyxatlar({
-    Key? key,
-  }) : super(key: key);
+  final List<ListModeli> royxatlar;
+  final Function removeList;
+
+  ListRoyxatlar(this.royxatlar,this.removeList);
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +24,14 @@ class ListRoyxatlar extends StatelessWidget {
           ),
           child: ListView.builder(
             itemBuilder: (ctx, index) {
-              return ListTile(
-                leading: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: CircleAvatar(
-                    radius: 24,
-                    backgroundColor: Color(0xffEFEEFC),
-                    child: Icon(
-                      (Icons.home),
-                      color: Colors.black45,
-                      size: 24,
-                    ),
-                  ),
-                ),
-                title: Text("Konditsioner"),
-                subtitle: Text("13-August, 2021"),
-                trailing: Text("350,000 so'm"),
-              );
+              return ListTileRoyxat(royxatlar[index],removeList);
             },
-            itemCount: 5,
+            
+            itemCount: royxatlar.length,
           ),
         ),
       ),
     );
   }
 }
+

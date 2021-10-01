@@ -1,11 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class PercentAndMoney extends StatelessWidget {
-  const PercentAndMoney({
-    Key? key,
-  }) : super(key: key);
+class PercentAndMoney extends StatefulWidget {
 
+  final Function _allBudjet;
+  final double budjet;
+
+  PercentAndMoney(this._allBudjet,this.budjet);
+
+  @override
+  State<PercentAndMoney> createState() => _PercentAndMoneyState();
+}
+
+class _PercentAndMoneyState extends State<PercentAndMoney> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,10 +37,12 @@ class PercentAndMoney extends StatelessWidget {
                     style: TextStyle(fontSize: 12),
                   ),
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget._allBudjet(context);
+                    },
                     icon: Icon(Icons.edit),
                     label: Text(
-                      "10,000,000 so'm",
+                      "${widget.budjet.toString()} so'm",
                       style: TextStyle(
                         fontSize: 12,
                         decoration: TextDecoration.underline,
@@ -51,10 +61,11 @@ class PercentAndMoney extends StatelessWidget {
             alignment: MainAxisAlignment.spaceAround,
             width: 320,
             lineHeight: 5,
+            animationDuration: 50,
             percent: 0.9,
             backgroundColor: Colors.grey,
             linearGradient: LinearGradient(
-              colors: [
+               colors: [
                 Colors.blue,
                 Colors.lightBlueAccent,
                 Colors.blue,
@@ -66,3 +77,4 @@ class PercentAndMoney extends StatelessWidget {
     );
   }
 }
+
