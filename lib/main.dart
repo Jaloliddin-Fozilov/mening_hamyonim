@@ -34,9 +34,8 @@ class HamyonDastur extends StatefulWidget {
 }
 
 class _HamyonDasturState extends State<HamyonDastur> {
-
   ListData royxatlar = ListData();
-  DateTime? tanlanganOy;
+  DateTime tanlanganOy = DateTime.now();
   double budjet = 0;
 
   void _addConsumptionModalWindow(BuildContext context) {
@@ -49,30 +48,28 @@ class _HamyonDasturState extends State<HamyonDastur> {
       },
     );
   }
-  void _allBudjet (BuildContext context){
-    showModalBottomSheet(context: context, 
-    isDismissible: false,
-    builder: (ctx){
-      return AddBudjet(_addAllBudjet);
-    },);
+
+  void _allBudjet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      builder: (ctx) {
+        return AddBudjet(_addAllBudjet);
+      },
+    );
   }
 
-  void _addAllBudjet (double iBudjet){
+  void _addAllBudjet(double iBudjet) {
     setState(() {
       budjet = iBudjet;
     });
   }
 
-  void _xarajat(String name, DateTime day, double price, IconData icon){
-    print(name);
-    print(day);
-    print(price);
-    print(icon);
+  void _xarajat(String name, DateTime day, double price, IconData icon) {
     setState(() {
       royxatlar.addToList(name, day, price, icon);
     });
   }
-
 
   void selectDate(BuildContext context) {
     showMonthPicker(
@@ -80,36 +77,37 @@ class _HamyonDasturState extends State<HamyonDastur> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2019),
       lastDate: DateTime.now(),
-    ).then((selectedMonth){
-      if(selectedMonth != null){
-        setState(() {
-            tanlanganOy = selectedMonth;
-        },);
-      }
-    },);
+    ).then(
+      (selectedMonth) {
+        if (selectedMonth != null) {
+          setState(
+            () {
+              tanlanganOy = selectedMonth;
+            },
+          );
+        }
+      },
+    );
   }
 
-  void removeList(String id){
-    royxatlar.sortByMonth(tanlanganOy!).removeWhere((royxatlar) => royxatlar.id == id);
+  void removeList(String id) {
+    royxatlar
+        .sortByMonth(tanlanganOy)
+        .removeWhere((royxatlar) => royxatlar.id == id);
   }
 
-  void previousMonth(){
+  void previousMonth() {
     setState(() {
-      if(tanlanganOy == null){
-          tanlanganOy = DateTime.now();
-          tanlanganOy = DateTime(tanlanganOy!.year, tanlanganOy!.month - 1);
-      }else{
-        tanlanganOy = DateTime(tanlanganOy!.year, tanlanganOy!.month - 1);
+      if (tanlanganOy != null) {
+        tanlanganOy = DateTime(tanlanganOy.year, tanlanganOy.month - 1);
       }
     });
   }
-  void nextMonth(){
+
+  void nextMonth() {
     setState(() {
-      if(tanlanganOy == null){
-          tanlanganOy = DateTime.now();
-          tanlanganOy = DateTime(tanlanganOy!.year, tanlanganOy!.month + 1);
-      }else{
-        tanlanganOy = DateTime(tanlanganOy!.year, tanlanganOy!.month + 1);
+      if (tanlanganOy != null) {
+        tanlanganOy = DateTime(tanlanganOy.year, tanlanganOy.month + 1);
       }
     });
   }
@@ -132,11 +130,12 @@ class _HamyonDasturState extends State<HamyonDastur> {
       body: Column(
         children: [
           ActiveDate(
-            selectDate,tanlanganOy,
+            selectDate,
+            tanlanganOy,
           ),
-          MoneyWidget(previousMonth,nextMonth),
-          PercentAndMoney(_allBudjet,budjet),
-          ListRoyxatlar(royxatlar.sortByMonth(tanlanganOy!),removeList),
+          MoneyWidget(previousMonth, nextMonth),
+          PercentAndMoney(_allBudjet, budjet),
+          ListRoyxatlar(royxatlar.sortByMonth(tanlanganOy), removeList),
         ],
       ),
     );
