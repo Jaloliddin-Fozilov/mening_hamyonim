@@ -90,6 +90,13 @@ class _HamyonDasturState extends State<HamyonDastur> {
     );
   }
 
+  double totalPriceSum(double sum) {
+    print(sum);
+    return royxatlar
+        .sortByMonth(tanlanganOy)
+        .fold(0, (price, _royxat) => price + _royxat.price);
+  }
+
   void removeList(String id) {
     royxatlar
         .sortByMonth(tanlanganOy)
@@ -133,7 +140,7 @@ class _HamyonDasturState extends State<HamyonDastur> {
             selectDate,
             tanlanganOy,
           ),
-          MoneyWidget(previousMonth, nextMonth),
+          MoneyWidget(previousMonth, nextMonth, totalPriceSum),
           PercentAndMoney(_allBudjet, budjet),
           ListRoyxatlar(royxatlar.sortByMonth(tanlanganOy), removeList),
         ],

@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 class MoneyWidget extends StatelessWidget {
   final Function() previousMonth;
   final Function() nextMonth;
-  
+  final Function totalPriceSum;
+
   MoneyWidget(
     this.previousMonth,
     this.nextMonth,
+    this.totalPriceSum,
   );
 
   @override
   Widget build(BuildContext context) {
+    print(totalPriceSum);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -41,7 +44,7 @@ class MoneyWidget extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: "4,895,000",
+                  text: "$totalPriceSum",
                   style: TextStyle(
                     fontSize: 46,
                   ),
