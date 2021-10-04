@@ -37,6 +37,7 @@ class _HamyonDasturState extends State<HamyonDastur> {
   ListData royxatlar = ListData();
   DateTime tanlanganOy = DateTime.now();
   double budjet = 0;
+  double percent = 0.0;
 
   void _addConsumptionModalWindow(BuildContext context) {
     showModalBottomSheet(
@@ -71,6 +72,13 @@ class _HamyonDasturState extends State<HamyonDastur> {
     });
   }
 
+  double percentCalc() {
+    setState(() {
+      percent = totalPriceSum() / (budjet / 100);
+    });
+    return percent;
+  }
+
   void selectDate(BuildContext context) {
     showMonthPicker(
       context: context,
@@ -90,8 +98,7 @@ class _HamyonDasturState extends State<HamyonDastur> {
     );
   }
 
-  double totalPriceSum(double sum) {
-    print(sum);
+  double totalPriceSum() {
     return royxatlar
         .sortByMonth(tanlanganOy)
         .fold(0, (price, _royxat) => price + _royxat.price);
@@ -140,8 +147,8 @@ class _HamyonDasturState extends State<HamyonDastur> {
             selectDate,
             tanlanganOy,
           ),
-          MoneyWidget(previousMonth, nextMonth, totalPriceSum),
-          PercentAndMoney(_allBudjet, budjet),
+          MoneyWidget(previousMonth, nextMonth, totalPriceSum()),
+          PercentAndMoney(_allBudjet, budjet, percentCalc()),
           ListRoyxatlar(royxatlar.sortByMonth(tanlanganOy), removeList),
         ],
       ),

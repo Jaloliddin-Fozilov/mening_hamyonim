@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MoneyWidget extends StatelessWidget {
   final Function() previousMonth;
   final Function() nextMonth;
-  final Function totalPriceSum;
+  final double totalPriceSum;
 
   MoneyWidget(
     this.previousMonth,
@@ -13,7 +14,6 @@ class MoneyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(totalPriceSum);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -25,12 +25,12 @@ class MoneyWidget extends StatelessWidget {
               border: Border.all(width: 2, color: Colors.black45),
             ),
             child: CircleAvatar(
-              radius: 16,
+              radius: 14,
               backgroundColor: Colors.transparent,
               child: IconButton(
                 icon: Icon(Icons.arrow_left),
                 color: Colors.black45,
-                iconSize: 24,
+                iconSize: 20,
                 padding: const EdgeInsets.all(0),
                 onPressed: previousMonth,
               ),
@@ -44,9 +44,9 @@ class MoneyWidget extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: "$totalPriceSum",
+                  text: NumberFormat.currency(symbol: "").format(totalPriceSum),
                   style: TextStyle(
-                    fontSize: 46,
+                    fontSize: 36,
                   ),
                 ),
                 TextSpan(
@@ -64,12 +64,12 @@ class MoneyWidget extends StatelessWidget {
               border: Border.all(width: 2, color: Colors.black45),
             ),
             child: CircleAvatar(
-              radius: 16,
+              radius: 14,
               backgroundColor: Colors.transparent,
               child: IconButton(
                 icon: Icon(Icons.arrow_right),
                 color: Colors.black45,
-                iconSize: 24,
+                iconSize: 20,
                 padding: const EdgeInsets.all(0),
                 onPressed: nextMonth,
               ),

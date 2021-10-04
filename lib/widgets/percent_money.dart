@@ -1,13 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:intl/intl.dart';
 
 class PercentAndMoney extends StatefulWidget {
-
   final Function _allBudjet;
   final double budjet;
+  final double percentCalc;
+  var budjetF = NumberFormat("###.0#");
 
-  PercentAndMoney(this._allBudjet,this.budjet);
+  PercentAndMoney(
+    this._allBudjet,
+    this.budjet,
+    this.percentCalc,
+  );
 
   @override
   State<PercentAndMoney> createState() => _PercentAndMoneyState();
@@ -42,7 +47,7 @@ class _PercentAndMoneyState extends State<PercentAndMoney> {
                     },
                     icon: Icon(Icons.edit),
                     label: Text(
-                      "${widget.budjet.toString()} so'm",
+                      "${NumberFormat.currency(symbol: "").format(widget.budjet)} so'm",
                       style: TextStyle(
                         fontSize: 12,
                         decoration: TextDecoration.underline,
@@ -52,7 +57,7 @@ class _PercentAndMoneyState extends State<PercentAndMoney> {
                 ],
               ),
               Text(
-                "90.0%",
+                "${widget.percentCalc.toStringAsFixed(1)}%",
                 style: TextStyle(fontSize: 12),
               ),
             ],
@@ -65,7 +70,7 @@ class _PercentAndMoneyState extends State<PercentAndMoney> {
             percent: 0.9,
             backgroundColor: Colors.grey,
             linearGradient: LinearGradient(
-               colors: [
+              colors: [
                 Colors.blue,
                 Colors.lightBlueAccent,
                 Colors.blue,
@@ -77,4 +82,3 @@ class _PercentAndMoneyState extends State<PercentAndMoney> {
     );
   }
 }
-
