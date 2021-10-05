@@ -46,7 +46,7 @@ class MoneyWidget extends StatelessWidget {
                 TextSpan(
                   text: NumberFormat.currency(symbol: "").format(totalPriceSum),
                   style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 34,
                   ),
                 ),
                 TextSpan(

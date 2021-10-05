@@ -43,4 +43,8 @@ class ListData {
         price: price,
         icon: icon));
   }
+
+  void removeConsumption(String id) {
+    _royxat.removeWhere((royxatlar) => royxatlar.id == id);
+  }
 }

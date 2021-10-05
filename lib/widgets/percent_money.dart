@@ -19,6 +19,10 @@ class PercentAndMoney extends StatefulWidget {
 }
 
 class _PercentAndMoneyState extends State<PercentAndMoney> {
+  void perdentCalc() {
+    int percentResult = widget.percentCalc.toInt();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,7 +71,10 @@ class _PercentAndMoneyState extends State<PercentAndMoney> {
             width: 320,
             lineHeight: 5,
             animationDuration: 50,
-            percent: 0.9,
+            percent:
+                double.parse(widget.percentCalc.toStringAsFixed(1)) / 100 < 1.0
+                    ? double.parse(widget.percentCalc.toStringAsFixed(1)) / 100
+                    : 1,
             backgroundColor: Colors.grey,
             linearGradient: LinearGradient(
               colors: [

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AddBudjet extends StatelessWidget {
-
   final inputBudjet = TextEditingController();
   final Function addAllBudjet;
   late double budjet;
 
   AddBudjet(this.addAllBudjet);
-  
-  void submitBudjet(){
-    if(inputBudjet.text.isEmpty){
+
+  void submitBudjet() {
+    if (inputBudjet.text.isEmpty) {
       return;
     }
     budjet = double.parse(inputBudjet.text);
@@ -21,24 +20,34 @@ class AddBudjet extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(
-      children: [
-        TextField(
-          decoration: InputDecoration(
-            labelText: "Oylik byudjetni kiriting",
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              labelText: "Oylik byudjetni kiriting",
+            ),
+            controller: inputBudjet,
+            keyboardType: TextInputType.number,
           ),
-          controller: inputBudjet,
-          keyboardType: TextInputType.number,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TextButton(onPressed: (){
-              Navigator.of(context).pop();
-            }, child: Text("Bekor qilish"),),
-            ElevatedButton(onPressed: submitBudjet, child: Text("Kiritish"),),
-          ],
-        ),
-      ],
-    ),);
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Bekor qilish"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  submitBudjet();
+                  Navigator.of(context).pop();
+                },
+                child: Text("Kiritish"),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

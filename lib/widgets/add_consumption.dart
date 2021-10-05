@@ -4,9 +4,8 @@ import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
 class AddConsumtionModal extends StatefulWidget {
   final Function xarajat;
-  
-  AddConsumtionModal(this.xarajat);
 
+  AddConsumtionModal(this.xarajat);
 
   @override
   State<AddConsumtionModal> createState() => _AddConsumtionModalState();
@@ -19,14 +18,16 @@ class _AddConsumtionModalState extends State<AddConsumtionModal> {
   final inputXarajatName = TextEditingController();
   final inputXarajatMiqdor = TextEditingController();
 
-
-  
-
-  void submitXarajat(){
-    if(inputXarajatName.text.isEmpty && inputXarajatMiqdor.text.isEmpty && tanlanganKun == null && tanlanganIcon == null){
+  void submitXarajat() {
+    if (inputXarajatName.text.isEmpty &&
+        inputXarajatMiqdor.text.isEmpty &&
+        tanlanganKun == null &&
+        tanlanganIcon == null) {
       return;
     }
-    widget.xarajat(inputXarajatName.text,tanlanganKun,double.parse(inputXarajatMiqdor.text),tanlanganIcon);
+    widget.xarajat(inputXarajatName.text, tanlanganKun,
+        double.parse(inputXarajatMiqdor.text), tanlanganIcon);
+    Navigator.of(context).pop();
   }
 
   void selectDateDay(BuildContext context) {
@@ -135,7 +136,9 @@ class _AddConsumtionModalState extends State<AddConsumtionModal> {
                   child: Text("BEKOR QILISH"),
                 ),
                 ElevatedButton(
-                  onPressed: submitXarajat,
+                  onPressed: () {
+                    submitXarajat();
+                  },
                   child: Text("KIRITISH"),
                 )
               ],

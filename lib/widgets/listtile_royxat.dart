@@ -20,6 +20,8 @@ class _ListTileRoyxatState extends State<ListTileRoyxat> {
       key: UniqueKey(),
       onDismissed: (direction) {
         // Then show a snackbar.
+        widget.removeList(widget.royxatlar.id);
+        print("listtile ${widget.royxatlar.id}");
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("${widget.royxatlar.name} o'chirildi")));
       },

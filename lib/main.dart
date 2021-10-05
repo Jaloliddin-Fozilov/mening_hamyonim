@@ -105,9 +105,11 @@ class _HamyonDasturState extends State<HamyonDastur> {
   }
 
   void removeList(String id) {
-    royxatlar
-        .sortByMonth(tanlanganOy)
-        .removeWhere((royxatlar) => royxatlar.id == id);
+    setState(() {
+      print("main $id");
+      print("main ${royxatlar.royxat.length}");
+      royxatlar.removeConsumption(id);
+    });
   }
 
   void previousMonth() {
