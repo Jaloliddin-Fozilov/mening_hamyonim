@@ -71,6 +71,11 @@ class _HamyonDasturState extends State<HamyonDastur> {
       royxatlar.addToList(name, day, price, icon);
     });
   }
+  void _oylikHisoblagichBottomSheet(){
+    showModalBottomSheet(context: context, builder: (ctx){
+      return Container(child: Column(children: [Text("data"),],),);
+    },);
+  }
 
   double percentCalc() {
     setState(() {
@@ -137,10 +142,17 @@ class _HamyonDasturState extends State<HamyonDastur> {
         actions: <Widget>[
           IconButton(
             onPressed: () {
+              _oylikHisoblagichBottomSheet();
+            },
+            icon: Icon(Icons.money),
+          ),
+          IconButton(
+            onPressed: () {
               _addConsumptionModalWindow(context);
             },
             icon: Icon(Icons.add),
           ),
+          
         ],
       ),
       body: Column(
