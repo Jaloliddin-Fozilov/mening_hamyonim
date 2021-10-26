@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mening_hamyonim/models/list_model.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
@@ -12,6 +13,11 @@ import './models/list_model.dart';
 import './widgets/add_budjet.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ],);
   runApp(MyApp());
 }
 
@@ -72,9 +78,23 @@ class _HamyonDasturState extends State<HamyonDastur> {
     });
   }
   void _oylikHisoblagichBottomSheet(){
-    showModalBottomSheet(context: context, builder: (ctx){
-      return Container(child: Column(children: [Text("data"),],),);
-    },);
+    showModalBottomSheet(isScrollControlled: true, context: context, builder: (ctx){
+      return Container(child: 
+      Column(children: 
+      [SizedBox(
+        height: MediaQuery.of(context).padding.top,
+        ),
+        Text("Oylik hisoblagich",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          ),
+      ),
+      ],
+      ),
+      );
+    },
+    );
   }
 
   double percentCalc() {
@@ -139,13 +159,14 @@ class _HamyonDasturState extends State<HamyonDastur> {
       appBar: AppBar(
         title: Text("Mening hamyonim"),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
+        leading: IconButton(
             onPressed: () {
               _oylikHisoblagichBottomSheet();
             },
-            icon: Icon(Icons.money),
+            icon: Icon(Icons.attach_money),
           ),
+        actions: <Widget>[
+          
           IconButton(
             onPressed: () {
               _addConsumptionModalWindow(context);
