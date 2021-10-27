@@ -12,8 +12,6 @@ class ActiveDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: Row(
@@ -25,9 +23,9 @@ class ActiveDate extends StatelessWidget {
             },
             child: Text(
               tanlanganOy == null
-                ? DateFormat("MMMM, yyyy").format(DateTime.now())
-                : DateFormat("MMMM, yyyy").format(tanlanganOy!),
-                style: TextStyle(color: Colors.black, fontSize: 18),
+                  ? DateFormat("MMMM, yyyy").format(DateTime.now())
+                  : DateFormat("MMMM, yyyy").format(tanlanganOy!),
+              style: TextStyle(color: Colors.black, fontSize: 18),
             ),
           ),
         ],

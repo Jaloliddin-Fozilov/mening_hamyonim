@@ -11,19 +11,23 @@ import './widgets/list_royxatlar.dart';
 import './widgets/add_consumption.dart';
 import './models/list_model.dart';
 import './widgets/add_budjet.dart';
+import './widgets/calcOylikHisoblagich.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.portraitUp,
-  ],);
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ],
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.lato().fontFamily,
@@ -37,6 +41,7 @@ class MyApp extends StatelessWidget {
 class HamyonDastur extends StatefulWidget {
   @override
   State<HamyonDastur> createState() => _HamyonDasturState();
+  
 }
 
 class _HamyonDasturState extends State<HamyonDastur> {
@@ -44,6 +49,7 @@ class _HamyonDasturState extends State<HamyonDastur> {
   DateTime tanlanganOy = DateTime.now();
   double budjet = 0;
   double percent = 0.0;
+  
 
   void _addConsumptionModalWindow(BuildContext context) {
     showModalBottomSheet(
@@ -77,23 +83,15 @@ class _HamyonDasturState extends State<HamyonDastur> {
       royxatlar.addToList(name, day, price, icon);
     });
   }
-  void _oylikHisoblagichBottomSheet(){
-    showModalBottomSheet(isScrollControlled: true, context: context, builder: (ctx){
-      return Container(child: 
-      Column(children: 
-      [SizedBox(
-        height: MediaQuery.of(context).padding.top,
-        ),
-        Text("Oylik hisoblagich",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-          ),
-      ),
-      ],
-      ),
-      );
-    },
+
+  void _oylikHisoblagichBottomSheet() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: false,
+      context: context,
+      builder: (ctx) {
+        return CalcOylikHisoblagich();
+      },
     );
   }
 
@@ -160,20 +158,18 @@ class _HamyonDasturState extends State<HamyonDastur> {
         title: Text("Mening hamyonim"),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {
-              _oylikHisoblagichBottomSheet();
-            },
-            icon: Icon(Icons.attach_money),
-          ),
+          onPressed: () {
+            _oylikHisoblagichBottomSheet();
+          },
+          icon: Icon(Icons.attach_money),
+        ),
         actions: <Widget>[
-          
           IconButton(
             onPressed: () {
               _addConsumptionModalWindow(context);
             },
             icon: Icon(Icons.add),
           ),
-          
         ],
       ),
       body: Column(
