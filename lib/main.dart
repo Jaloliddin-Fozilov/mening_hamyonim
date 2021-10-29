@@ -27,7 +27,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.lato().fontFamily,
@@ -41,7 +40,6 @@ class MyApp extends StatelessWidget {
 class HamyonDastur extends StatefulWidget {
   @override
   State<HamyonDastur> createState() => _HamyonDasturState();
-  
 }
 
 class _HamyonDasturState extends State<HamyonDastur> {
@@ -49,7 +47,6 @@ class _HamyonDasturState extends State<HamyonDastur> {
   DateTime tanlanganOy = DateTime.now();
   double budjet = 0;
   double percent = 0.0;
-  
 
   void _addConsumptionModalWindow(BuildContext context) {
     showModalBottomSheet(
